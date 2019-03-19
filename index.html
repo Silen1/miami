@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #target {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: orange;
+            line-height: 200px;
+            text-align: center;
+            position: fixed;
+            top: 500px;
+            left: -80px;
+            cursor: move;
+        }
+        #box {
+            -webkit-filter: blur(var(--filterBlur));
+            -moz-filter: blur(var(--filterBlur));
+            -o-filter: blur(var(--filterBlur));
+            -ms-filter: blur(var(--filterBlur));
+            filter: blur(var(--filterBlur));
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div>this is a div</div>
+        <p>this is a paragraph</p>
+    </div>
+    <div id="target" draggable="true">this is target</div>
+
+    <script>
+
+        var target = document.querySelector('#target');
+        var targetStyle = target.style;
+        var computedTargetStyle = window.getComputedStyle(target);
+        var initCursorX,
+            initCursorY,
+            initDomX = +computedTargetStyle.left.slice(0, -2),
+            initDomY = +computedTargetStyle.top.slice(0, -2);
+
+        target.addEventListener('dragstart', function(e) {
+            initCursorX = e.clientX;
+            initCursorY = e.clientY;
+        });
+
+        target.addEventListener('drag', function(e) {
+            if (e.clientX && e.clientY) {
+                targetStyle.left = initDomX + (e.clientX - initCursorX) + 'px';
+                targetStyle.top = initDomY + (e.clientY - initCursorY) + 'px';
+                document.body.style.setProperty('--filterBlur', '2px');
+            }
+        });
+
+        target.addEventListener('dragend', function(e) {
+            initDomX = initDomX + (e.clientX - initCursorX);
+            initDomY = initDomY + (e.clientY - initCursorY);
+        });
+    </script>
+</body>
+</html>

@@ -63,6 +63,7 @@
             right: 135px;
             bottom: 30px;
             width: 90px;
+            cursor: pointer;
             display: var(--surprise, none);
             -webkit-animation: kobe .6s;
                     animation: kobe .6s;
@@ -253,6 +254,11 @@
             initDomY = initDomY + (e.clientY - initCursorY);
             target.draggable = false;
             document.body.style.setProperty('--surprise', 'block');
+        });
+
+        var btn = document.querySelector('.btn');
+        btn.addEventListener('click', function() {
+            window.open('https://search.jd.com/Search?keyword=%E9%9B%80%E5%B7%A2%E5%92%96%E5%95%A1&enc=utf-8&suggest=3.def.0.V18--&wq=%E9%9B%80%E5%B7%A2&pvid=0871968f0f5847d6aba132b53d748370');
         });
     </script>
 </body>

@@ -6,6 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>miami</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+        }
+        a {
+            text-decoration: none;
+        }
         #box {
             -webkit-filter: blur(var(--filterBlur));
             -moz-filter: blur(var(--filterBlur));
@@ -13,45 +22,151 @@
             -ms-filter: blur(var(--filterBlur));
             filter: blur(var(--filterBlur));
             position: absolute;
-            top: 150px;
+            top: 135px;
             left: 100px;
         }
+        #box img {
+            width: 650px;
+        }
         #mask {
-            width: 1178px;
-            height: 291px;
+            width: 650px;
+            height: 160.56px;
             background: rgba(0, 0, 0, 0.3);
             position: absolute;
-            top: 150px;
+            top: 135px;
             left: 100px;
             overflow: hidden;
         }
         #target {
             cursor: move;
             position: absolute;
-            left: -170px;
+            left: -103px;
             top: 0;
             -webkit-filter: blur(0);
             -moz-filter: blur(0);
             -o-filter: blur(0);
             -ms-filter: blur(0);
             filter: blur(0);
+            width: 200px;
         }
         .text {
             position: absolute;
-            right: 215px;
-            top: 5px;
+            right: 132px;
+            top: 12px;
+            width: 155px;
             display: var(--surprise, none);
             -webkit-animation: kobe .6s;
                     animation: kobe .6s;
         }
         .btn {
             position: absolute;
-            right: 215px;
-            bottom: 45px;
+            right: 135px;
+            bottom: 30px;
+            width: 90px;
             display: var(--surprise, none);
             -webkit-animation: kobe .6s;
                     animation: kobe .6s;
         }
+
+        .main {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                    justify-content: space-between;
+        }
+        .left {
+            width: 60%;
+            padding-left: 100px;
+            padding-bottom: 100px;
+        }
+        .right {
+            width: 30%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            -webkit-box-align: end;
+                -ms-flex-align: end;
+                    align-items: flex-end;
+            padding-right: 100px;
+        }
+        .header {
+            height: 70px;
+            background: #4169E1;
+            line-height: 70px;
+            padding-left: 100px;
+            color: #fff;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+        .label {
+            margin-top: 35px;
+            font-size: 13px;
+            color: #bbb;
+        }
+        h2 {
+            margin-top: 200px;
+            width: 650px;
+            text-align: left;
+        }
+        .title-label {
+            color: #bbb;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+        .title-label a {
+            color: #00abff;
+            margin-right: 10px;
+        }
+        .p {
+            margin-top: 25px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #666;
+        }
+        .right-title {
+            margin-top: 58px;
+            font-size: 15px;
+            border-left: 4px solid #00abff;
+            padding-left: 10px;
+            line-height: 1.2;
+            width: 300px;
+        }
+        .right img {
+            width: 300px;
+            margin-top: 20px;
+        }
+        .btm-label {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #b8b8b8;
+        }
+        .btm-label span {
+            color: #ababab;
+            background: #f0f0f0;
+            margin-right: 5px;
+            display: inline-block;
+            width: 50px;
+            height: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .btm {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 13px;
+            color: #ababab;
+        }
+        .btm a {
+            color: #00abff;
+            margin-left: 20px;
+        }
+
         @-webkit-keyframes kobe {
             from {
                 opacity: 0;
@@ -71,13 +186,43 @@
     </style>
 </head>
 <body>
-    <div id="box">
-        <img src="http://img.souche.com/f2e/49a8b850b65603902cbbce5fb5dd4c66.jpg" alt="">
-    </div>
-    <div id="mask">
-        <img id="target" draggable="true" src="http://img.souche.com/f2e/3d11fd9eccc4447c696a701fe5e935ff.png" alt="">
-        <img src="http://img.souche.com/f2e/1faad422c4ed3532038f1d0d3b98d42b.png" alt="" class="text">
-        <img src="http://img.souche.com/f2e/4d159a670afbf5441a08c3abc5ecf336.png" alt="" class="btn">
+    <div class="header">Miami</div>
+
+    <div class="main">
+        <div class="left">
+            <p class="label"><a href="http://www.myzaker.com/">首页</a> > <a href="http://www.myzaker.com/channel/8">生活</a> > <a href="http://www.myzaker.com/article/5c9193be32ce4035a2000001/">正文</a></p>
+            <div id="box">
+                <img src="http://img.souche.com/f2e/49a8b850b65603902cbbce5fb5dd4c66.jpg" alt="">
+            </div>
+            <div id="mask">
+                <img id="target" draggable="true" src="http://img.souche.com/f2e/3d11fd9eccc4447c696a701fe5e935ff.png" alt="">
+                <img src="http://img.souche.com/f2e/1faad422c4ed3532038f1d0d3b98d42b.png" alt="" class="text">
+                <img src="http://img.souche.com/f2e/4d159a670afbf5441a08c3abc5ecf336.png" alt="" class="btn">
+            </div>
+            <h2>两部门：今年退休人员基本养老金涨 5% 左右</h2>
+            <p class="title-label">
+                <a href="http://www.myzaker.com/">中青网</a>
+                1小时前
+            </p>
+            <p class="p">今年继续提高退休人员基本养老金。</p>
+            <p class="p">中新网 3 月 20 日电 据人社部网站消息，日前，人力资源社会保障部、财政部联合下发《关于 2019 年调整退休人员基本养老金的通知》，明确从 2019 年 1 月 1 日起，为 2018 年底前已按规定办理退休手续并按月领取基本养老金的企业和机关事业单位退休人员提高基本养老金水平，总体调整水平为 2018 年退休人员月人均基本养老金的 5% 左右。此次调整，继续统一采取定额调整、挂钩调整与适当倾斜相结合的调整办法，定额调整体现社会公平，同一地区各类退休人员调整标准基本一致；挂钩调整体现 " 多缴多得 "、" 长缴多得 " 的激励机制，使在职时多缴费、长缴费的人员多得养老金；适当倾斜体现重点关怀，主要是对高龄退休人员和艰苦边远地区退休人员等群体予以照顾。</p>
+            <p class="p">此次调整是国家继 2016 年以来，连续第四年同步安排、统一调整企业和机关事业单位退休人员基本养老金，是保障和改善民生水平的重要措施，充分体现了党中央、国务院对广大退休人员的亲切关怀 , 预计将有 1.18 亿名退休人员受益。</p>
+            <p class="btm-label">
+                相关标签：
+                <span>jordan</span>
+                <span>kobe</span>
+                <span>james</span>
+                <span>wade</span>
+            </p>
+            <p class="btm">
+                以上内容由“中青网”发布
+                <a href="http://www.myzaker.com/article/5c9193be32ce4035a2000001/">查看原文</a>
+            </p>
+        </div>
+        <div class="right">
+            <p class="right-title">相关阅读</p>
+            <img src="http://img.souche.com/f2e/de61c7ae5ed2815d67023ac44a848831.png" alt="">
+        </div>
     </div>
 
     <script>

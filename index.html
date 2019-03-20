@@ -4,35 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>miami</title>
     <style>
-        #target {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: orange;
-            line-height: 200px;
-            text-align: center;
-            position: fixed;
-            top: 500px;
-            left: -80px;
-            cursor: move;
-        }
         #box {
             -webkit-filter: blur(var(--filterBlur));
             -moz-filter: blur(var(--filterBlur));
             -o-filter: blur(var(--filterBlur));
             -ms-filter: blur(var(--filterBlur));
             filter: blur(var(--filterBlur));
+            position: absolute;
+            top: 150px;
+            left: 100px;
+        }
+        #mask {
+            width: 1178px;
+            height: 291px;
+            background: rgba(0, 0, 0, 0.3);
+            position: absolute;
+            top: 150px;
+            left: 100px;
+            overflow: hidden;
+        }
+        #target {
+            cursor: move;
+            position: absolute;
+            left: -170px;
+            top: 0;
+            -webkit-filter: blur(0);
+            -moz-filter: blur(0);
+            -o-filter: blur(0);
+            -ms-filter: blur(0);
+            filter: blur(0);
+        }
+        .text {
+            position: absolute;
+            right: 215px;
+            top: 5px;
+            display: var(--surprise, none);
+            -webkit-animation: kobe .6s;
+                    animation: kobe .6s;
+        }
+        .btn {
+            position: absolute;
+            right: 215px;
+            bottom: 45px;
+            display: var(--surprise, none);
+            -webkit-animation: kobe .6s;
+                    animation: kobe .6s;
+        }
+        @-webkit-keyframes kobe {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes kobe {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
     <div id="box">
-        <div>this is a div</div>
-        <p>this is a paragraph</p>
+        <img src="http://img.souche.com/f2e/49a8b850b65603902cbbce5fb5dd4c66.jpg" alt="">
     </div>
-    <div id="target" draggable="true">this is target</div>
+    <div id="mask">
+        <img id="target" draggable="true" src="http://img.souche.com/f2e/3d11fd9eccc4447c696a701fe5e935ff.png" alt="">
+        <img src="http://img.souche.com/f2e/1faad422c4ed3532038f1d0d3b98d42b.png" alt="" class="text">
+        <img src="http://img.souche.com/f2e/4d159a670afbf5441a08c3abc5ecf336.png" alt="" class="btn">
+    </div>
 
     <script>
 
@@ -51,8 +97,8 @@
 
         target.addEventListener('drag', function(e) {
             if (e.clientX && e.clientY) {
-                targetStyle.left = initDomX + (e.clientX - initCursorX) + 'px';
-                targetStyle.top = initDomY + (e.clientY - initCursorY) + 'px';
+                targetStyle.left = initDomX + (e.clientX - initCursorX) + 6 + 'px';
+                targetStyle.top = initDomY + (e.clientY - initCursorY) + 6 + 'px';
                 document.body.style.setProperty('--filterBlur', '2px');
             }
         });
@@ -60,6 +106,8 @@
         target.addEventListener('dragend', function(e) {
             initDomX = initDomX + (e.clientX - initCursorX);
             initDomY = initDomY + (e.clientY - initCursorY);
+            target.draggable = false;
+            document.body.style.setProperty('--surprise', 'block');
         });
     </script>
 </body>

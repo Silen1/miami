@@ -54,7 +54,7 @@
             right: 132px;
             top: 12px;
             width: 155px;
-            display: var(--surprise, none);
+            display: none;
             -webkit-animation: kobe .6s;
                     animation: kobe .6s;
         }
@@ -64,7 +64,7 @@
             bottom: 30px;
             width: 90px;
             cursor: pointer;
-            display: var(--surprise, none);
+            display: none;
             -webkit-animation: kobe .6s;
                     animation: kobe .6s;
         }
@@ -186,6 +186,9 @@
             color: #00abff;
             margin-left: 20px;
         }
+        #blurry-bg {
+            display: none;
+        }
 
         @-webkit-keyframes kobe {
             from {
@@ -230,7 +233,8 @@
                 > <span>正文</span>
             </p>
             <div id="box">
-                <img src="http://img.souche.com/f2e/49a8b850b65603902cbbce5fb5dd4c66.jpg" alt="">
+                <img src="http://img.souche.com/f2e/49a8b850b65603902cbbce5fb5dd4c66.jpg" id="bg" alt="">
+                <img src="http://img.souche.com/f2e/fe068059f713a4c45ce96f404f0774c0.jpg" id="blurry-bg" alt="">
             </div>
             <div id="mask">
                 <img id="target" draggable="true" src="http://img.souche.com/f2e/3d11fd9eccc4447c696a701fe5e935ff.png" alt="">
@@ -262,6 +266,19 @@
     </div>
 
     <script>
+        var btn = document.querySelector('.btn');
+        btn.addEventListener('click', function() {
+            window.open('https://search.jd.com/Search?keyword=%E9%9B%80%E5%B7%A2%E5%92%96%E5%95%A1&enc=utf-8&suggest=3.def.0.V18--&wq=%E9%9B%80%E5%B7%A2&pvid=0871968f0f5847d6aba132b53d748370');
+        });
+
+        var navItems = document.querySelectorAll('.nav span');
+        for (var i = 0; i < navItems.length; i++) {
+            navItems[i].addEventListener('click', function(e) {
+                var activeItem = document.querySelector('.active');
+                activeItem.classList.remove('active');
+                e.target.classList.add('active');
+            });
+        }
 
         var target = document.querySelector('#target');
         var targetStyle = target.style;
@@ -270,40 +287,67 @@
             initCursorY,
             initDomX = +computedTargetStyle.left.slice(0, -2),
             initDomY = +computedTargetStyle.top.slice(0, -2);
+        var bg = document.querySelector('#bg');
+        var blurryBg = document.querySelector('#blurry-bg');
+        var text = document.querySelector('.text');
 
-        target.addEventListener('dragstart', function(e) {
-            initCursorX = e.clientX;
-            initCursorY = e.clientY;
-        });
-
-        target.addEventListener('drag', function(e) {
-            if (e.clientX && e.clientY) {
-                targetStyle.left = initDomX + (e.clientX - initCursorX) + 6 + 'px';
-                targetStyle.top = initDomY + (e.clientY - initCursorY) + 6 + 'px';
-                document.body.style.setProperty('--filterBlur', '2px');
-            }
-        });
-
-        target.addEventListener('dragend', function(e) {
-            initDomX = initDomX + (e.clientX - initCursorX);
-            initDomY = initDomY + (e.clientY - initCursorY);
-            target.draggable = false;
-            document.body.style.setProperty('--surprise', 'block');
-        });
-
-        var btn = document.querySelector('.btn');
-        btn.addEventListener('click', function() {
-            window.open('https://search.jd.com/Search?keyword=%E9%9B%80%E5%B7%A2%E5%92%96%E5%95%A1&enc=utf-8&suggest=3.def.0.V18--&wq=%E9%9B%80%E5%B7%A2&pvid=0871968f0f5847d6aba132b53d748370');
-        });
-
-        var navItems = document.querySelectorAll('.nav span');
-        navItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                var activeItem = document.querySelector('.active');
-                activeItem.classList.remove('active');
-                e.target.classList.add('active');
+        if (isIE()) {
+            IEDrag();
+        } else {
+            modernBrowserDrag();
+        }
+        function modernBrowserDrag() {
+            target.addEventListener('dragstart', function(e) {
+                initCursorX = e.clientX;
+                initCursorY = e.clientY;
             });
-        });
+
+            target.addEventListener('drag', function(e) {
+                if (e.clientX && e.clientY) {
+                    targetStyle.left = initDomX + (e.clientX - initCursorX) + 6 + 'px';
+                    targetStyle.top = initDomY + (e.clientY - initCursorY) + 6 + 'px';
+                    document.body.style.setProperty('--filterBlur', '2px');
+                }
+            });
+
+            target.addEventListener('dragend', function(e) {
+                // initDomX = initDomX + (e.clientX - initCursorX);
+                // initDomY = initDomY + (e.clientY - initCursorY);
+                target.draggable = false;
+                fadeInElements();
+            });
+        }
+        function IEDrag() {
+            target.draggable = false;
+            var dragging = false;
+            target.onmousedown = function(e) {
+                dragging = true;
+                initCursorX = e.clientX;
+                initCursorY = e.clientY;
+            }
+            document.onmousemove = function(e) {
+                if (dragging) {
+                    targetStyle.left = initDomX + (e.clientX - initCursorX) + 6 + 'px';
+                    targetStyle.top = initDomY + (e.clientY - initCursorY) + 6 + 'px';
+                    bg.style.display = 'none';
+                    blurryBg.style.display = 'block';
+                }
+            }
+            target.onmouseup = function() {
+                dragging = false;
+                document.onmousemove = null;
+                fadeInElements();
+            }
+        }
+
+        function isIE() {
+            return !!window.ActiveXObject || "ActiveXObject" in window;
+        }
+
+        function fadeInElements() {
+            btn.style.display = 'block';
+            text.style.display = 'block';
+        }
     </script>
 </body>
 </html>
